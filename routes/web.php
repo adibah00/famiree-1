@@ -25,6 +25,9 @@ Route::get('/delete_post/{id}', [HomeController::class, 'delete_post']);
 Route::get('/update_post/{id}', [HomeController::class, 'update_post']);
 Route::post('/confirm_update/{id}', [HomeController::class, 'confirm_update']);
 Route::get('redirects', 'App\Http\Controllers\HomeController@index');
+Route::post('/addUser', [HomeController::class, 'addUser']);
+Route::get('/User_menu', [HomeController::class, 'User_menu'])->name('User_menu');
+
 
 
 Route::middleware([
@@ -32,7 +35,5 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [HomeController::class,'index'])->name('dashboard');
 });

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -71,5 +72,26 @@ class HomeController extends Controller
         }
         $post->save();
         return redirect()->back();
+    }
+
+    public function addUser(Request $request){
+        $data=new user;
+        $data->name=$request->name;
+        $data->email=$request->email;
+        $data->password=bcrypt($request->password);
+        $data->usertype='user';
+        $data->save();
+        return redirect()->back();
+    }
+
+    public function User_menu(){
+        if(Auth::user()){
+            $role=Auth::user()->usertype ?? 'default';
+            if($role=='admin'){
+                return view('admin.userMenu');
+            }
+        }else {
+            return redirect()->back();
+        }
     }
 }
