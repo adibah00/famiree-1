@@ -24,6 +24,7 @@ Route::get('/view_post', [HomeController::class, 'view_post']);
 Route::get('/delete_post/{id}', [HomeController::class, 'delete_post']);
 Route::get('/update_post/{id}', [HomeController::class, 'update_post']);
 Route::post('/confirm_update/{id}', [HomeController::class, 'confirm_update']);
+Route::get('redirects', 'App\Http\Controllers\HomeController@index');
 
 
 Route::middleware([

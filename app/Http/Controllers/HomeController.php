@@ -10,7 +10,16 @@ class HomeController extends Controller
 {
     public function index(){
         $post=Post::all();
-        return view('home.index', compact('post'));
+        if(Auth::user()){
+            $role=Auth::user()->usertype ?? 'default';
+            if($role=='admin'){
+                return view('admin.dashboard');
+            }else{
+                return view('dashboard');
+            }
+        }else{
+            return view('home.index', compact('post'));
+        }
     }
 
     public function upload(Request $request){
