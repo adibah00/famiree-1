@@ -14,7 +14,8 @@ class HomeController extends Controller
         if(Auth::user()){
             $role=Auth::user()->usertype ?? 'default';
             if($role=='admin'){
-                return view('admin.dashboard');
+                $users=User::all();
+                return view('admin.dashboard', compact('users'));
             }else{
                 return view('dashboard');
             }
@@ -89,6 +90,17 @@ class HomeController extends Controller
             $role=Auth::user()->usertype ?? 'default';
             if($role=='admin'){
                 return view('admin.userMenu');
+            }
+        }else {
+            return redirect()->back();
+        }
+    }
+
+    public function famtree(){
+        if(Auth::user()){
+            $role=Auth::user()->usertype ?? 'default';
+            if($role=='user'){
+                return view('familytree');
             }
         }else {
             return redirect()->back();

@@ -22,7 +22,7 @@
                 @auth
                 <li><a href="{{ url('/dashboard') }}" class="btn btn-success">{{ Auth::user()->name }}</a></li>
                 @else
-                <li><a href="{{ route('register') }}" class="btn btn-success">Register</a></li>
+                <!-- <li><a href="{{ route('register') }}" class="btn btn-success">Register</a></li> -->
                 <li><a href="{{ route('login') }}" class="btn btn-primary">Login</a></li>
                 @endauth
                 @endif
@@ -37,15 +37,5 @@
             <img src="post/{{$post->image }}" height="300px" width="50%">
         </div>
         @endforeach
-        <!-- <div class="container">
-            <label>Yow Bro</label>
-            <p>Bootstrap (currently v3.3.7) has a few easy ways to quickly get started, each one appealing to a different skill level and use case. Read through to see what suits your particular needs.</p>
-            <img src="contoh.jpg" height="300px" width="50%">
-        </div>
-        <div class="container">
-            <label>Yow Bro</label>
-            <p>Bootstrap (currently v3.3.7) has a few easy ways to quickly get started, each one appealing to a different skill level and use case. Read through to see what suits your particular needs.</p>
-            <img src="contoh.jpg" height="300px" width="50%">
-        </div> -->
     </body>
 </html>

@@ -27,6 +27,7 @@ Route::post('/confirm_update/{id}', [HomeController::class, 'confirm_update']);
 Route::get('redirects', 'App\Http\Controllers\HomeController@index');
 Route::post('/addUser', [HomeController::class, 'addUser']);
 Route::get('/User_menu', [HomeController::class, 'User_menu'])->name('User_menu');
+Route::get('/famtree', [HomeController::class, 'famtree'])->name('famtree');
 
 
 
