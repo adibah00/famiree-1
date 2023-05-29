@@ -13,12 +13,15 @@
                 <title></title>
                 <!-- Latest compiled and minified CSS -->
                 <style type="text/css">
+                    body{
+                        background-color: #ECF0F1;
+                    }
                     table, tr, td{
-                        border: 1px solid #7d1128;
+                        border: 1px solid #232023;
                         border-collapse: collapse;
                     }
                     tr, td{
-                        background: #f7e7ce;
+                        background: #f9f9f9;
                         text-align: center;
                     }
                     /* Update button */
@@ -68,8 +71,8 @@
                             <td>{{$user->name}}</td>
                             <td>{{$user->email}}</td>
                             <td>{{$user->password}}</td>
-                            <td><a class="update-button">Update</a></td>
-                            <td><a class="delete-button">Delete</a></td>
+                            <td><a href="{{url('update_user', $user->id)}}" class="update-button">Update</a></td>
+                            <td><a onclick="return confirm('are sure to delete this ?');" href="{{url('delete_user', $user->id)}}" class="delete-button">Delete</a></td>
                         </tr>
                         @endforeach
                     </table>

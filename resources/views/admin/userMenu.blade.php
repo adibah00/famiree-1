@@ -6,6 +6,9 @@
     </x-slot>
 
     <style>
+        body{
+            background-color: #ECF0F1;
+        }
         form{
             display: flex;
             flex-direction: column;

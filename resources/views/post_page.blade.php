@@ -15,6 +15,10 @@
                 background: #f7e7ce;
                 text-align: center;
             }
+            .doctex{
+                color: blue;
+                text-decoration: underline;
+            }
         </style>
     </head>
     <body>
@@ -23,13 +27,19 @@
         <div style="padding-left:15%; padding-top:30px;">
             <table style="width:80%">
                 <tr>
-                    <th>Post Description</th>
+                    <th>Name</th>
+                    <th>Case</th>
+                    <th>Document</th>
+                    <th>Description</th>
                     <th>Image</th>
                     <th>Update</th>
                     <th>Delete</th>
                 </tr>
                 @foreach($post as $post)
                 <tr>
+                    <td>{{$post->name}}</td>
+                    <td>{{$post->client_case}}</td>
+                    <td><a class="doctex" href="post/{{$post->document}}">View Document Here</a></td>
                     <td>{{$post->description}}</td>
                     <td><img height="400px" width="400px" src="post/{{$post->image}}"></td>
                     <td><a href="{{url('update_post', $post->id)}}" class="btn btn-primary">Update</a></td>

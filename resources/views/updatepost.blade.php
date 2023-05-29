@@ -12,6 +12,21 @@
             <form action="{{url('confirm_update', $data->id)}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div>
+                    <label>Name</label>
+                    <input type="text" name="name" value="{{$data->name}}">
+                </div>
+                <br>
+                <div>
+                    <label>Case</label>
+                    <input type="text" name="client_case" value="{{$data->client_case}}">
+                </div>
+                <br>
+                <div>
+                    <label>Document</label>
+                    <input type="file" name="document">
+                </div>
+                <br>
+                <div>
                     <label>Post Description</label>
                     <input type="text" name="description" value="{{$data->description}}">
                 </div>

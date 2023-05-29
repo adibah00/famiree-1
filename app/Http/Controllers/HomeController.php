@@ -28,8 +28,24 @@ class HomeController extends Controller
         $data = new Post;
         // dari database punya nama assign ke variable username kat sini
         $data->username=Auth::user()->name;
+
+        $this->validate($request, [
+            'name' => 'required',
+            'client_case' => 'required',
+            'description' => 'required',
+            'document' => 'mimes:doc,docx,pdf,xls,xlsx,ppt,pptx',
+        ]);
+
         // assign description dari table post kat sini dalam variable
+        $data->name=$request->name;
+        $data->client_case=$request->client_case;
         $data->description=$request->description;
+        
+        //inserting document part
+        $document = $request->file('document');
+        $documentname = 'FT' .date('Ymdhis').'.'.$request->file('document')->getClientOriginalExtension();
+        $document->move('post',$documentname);
+        $data->document=$documentname;
         // inserting image part
         $image=$request->image;
         if($image){
@@ -62,8 +78,21 @@ class HomeController extends Controller
 
     public function confirm_update(Request $request, $id){
         $post=post::find($id);
+
+        $this->validate($request, [
+            'document' => 'mimes:doc,docx,pdf,xls,xlsx,ppt,pptx',
+        ]);
+
+        $post->name=$request->name;
+        $post->client_case=$request->client_case;
         $post->description=$request->description;
         $image=$request->image;
+
+        $document = $request->file('document');
+        $documentname = 'FT' .date('Ymdhis').'.'.$request->file('document')->getClientOriginalExtension();
+        $document->move('post',$documentname);
+        $post->document=$documentname;
+
         if($image){
             $imagename=time().'.'.$image->getClientOriginalExtension();
             //store image in post folder
@@ -105,5 +134,25 @@ class HomeController extends Controller
         }else {
             return redirect()->back();
         }
+    }
+
+    public function update_user($id){
+        $data=User::find($id);
+        return view('admin.updateuser', compact('data'));
+    }
+
+    public function confirm_updateUser(Request $request, $id){
+        $data=User::find($id);
+        $data->name=$request->name;
+        $data->email=$request->email;
+        $data->password=$request->password;
+        $data->save();
+        return redirect()->back();
+    }
+
+    public function delete_user($id){
+        $data=User::find($id);
+        $data->delete();
+        return redirect()->back();
     }
 }
