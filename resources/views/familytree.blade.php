@@ -5,112 +5,62 @@
         </h2>
     </x-slot>
 </x-app-layout>
-   <style>
-            /*Now the CSS*/
+<style>
+    .tree {
+        display: flex;
+        flex-direction: column;
+    }
 
-            .container {
-                padding-top:200px;
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                margin: auto;
-            }
+    .tree-node {
+        margin-left: 20px;
+        position: relative;
+    }
 
-            .tree ul {
-            padding-left: 50px;
-            position: relative;
-            }
+    .tree-node::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -20px;
+        width: 1px;
+        height: 100%;
+        background-color: #ccc;
+    }
 
-            .tree ul:before {
-            content: '';
-            display: block;
-            border-left: 1px solid #ccc;
-            height: 100%;
-            left: 10px;
-            position: absolute;
-            }
+    .tree-node::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: -10px;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: #ccc;
+        transform: translateY(-50%);
+    }
 
-            .tree li {
-            list-style-type: none;
-            margin: 0;
-            padding: 10px 0;
-            position: relative;
-            }
+    .tree-node:last-child::before {
+        height: 50%;
+    }
 
-            .tree li:before {
-            content: '';
-            display: block;
-            border-top: 1px solid #ccc;
-            height: 20px;
-            left: -20px;
-            position: absolute;
-            top: 10px;
-            width: 20px;
-            }
+    .tree-node:last-child::after {
+        display: none;
+    }
+</style>
 
-            .tree a {
-            color: #333;
-            text-decoration: none;
-            }
-
-            .tree a:hover {
-            text-decoration: underline;
-            }
-
-            .tree li a:before {
-            border-left: 1px solid #ccc;
-            border-bottom: 1px solid #ccc;
-            content: '';
-            height: 10px;
-            left: -20px;
-            position: absolute;
-            top: 10px;
-            width: 20px;
-            }
-
-            .tree li:first-child:before {
-            border: none;
-            }
-
-            .tree li:last-child:before {
-            border-left: 1px solid #ccc;
-            border-bottom: none;
-            height: 30px;
-            top: 0;
-            }
-
-        </style>
-
-        <div class="container">
-            <div>
-            <!-- Render the tree visualization -->
-                <ul>
-                    @foreach($treeData as $node)
-                        <li>
-                            {{ $node->client_case }}
-                            @if($node->children->isNotEmpty())
-                                <ul>
-                                    @foreach($node->children as $child)
-                                        <li>
-                                            {{ $child->client_case }}
-                                            @if($child->children->isNotEmpty())
-                                                <ul>
-                                                    @foreach($child->children as $grandchild)
-                                                        <li>
-                                                            {{ $grandchild->client_case }}
-                                                            <!-- Add more nested loops for deeper levels if needed -->
-                                                        </li>
-                                                    @endforeach
-                                                </ul>
-                                            @endif
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            @endif
-                        </li>
+    <div class="tree">
+        @foreach ($treeData as $data)
+            <div class="tree-node">
+                {{$data->id}}
+                {{$data->client_case}}
+                <div class="tree">
+                    @foreach($data->children as $child)
+                    <div class="tree-node">
+                        {{$child->id}}
+                        {{$child->client_case}}
+                    </div>
                     @endforeach
-                </ul>
+                </div>
             </div>
-        </div>
+        @endforeach
+    </div>
 

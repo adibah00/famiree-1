@@ -29,6 +29,7 @@ Route::get('redirects', 'App\Http\Controllers\HomeController@index');
 Route::post('/addUser', [HomeController::class, 'addUser']);
 Route::get('/User_menu', [HomeController::class, 'User_menu'])->name('User_menu');
 Route::get('/famtree', [HomeController::class, 'famtree'])->name('famtree');
+Route::get('/view_post', [HomeController::class, 'view_post'])->name('view_post');
 Route::get('/update_user/{id}', [HomeController::class, 'update_user'])->name('update_user');
 Route::post('/confirm_updateUser/{id}', [HomeController::class, 'confirm_updateUser']);
 Route::get('/delete_user/{id}', [HomeController::class, 'delete_user']);

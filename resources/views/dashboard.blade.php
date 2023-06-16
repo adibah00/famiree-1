@@ -94,13 +94,6 @@
                 <input type="submit" value="Submit" style="background: #d7ba89; cursor: pointer; padding: 10px; border-radius: 10px" >
             </div>
         </form>
-        <br>
-        <form action="{{url('view_post')}}" method="GET">
-            @csrf
-            <div style="display:flex; justify-content: center;padding-left: 200px; padding-bottom: 20px;">
-                <input type="submit" value="view my post" style="background: #d7ba89; cursor: pointer; padding: 10px; border-radius: 10px" >
-            </div>
-        </form>
     </div>
 
 </x-app-layout>
