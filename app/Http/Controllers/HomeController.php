@@ -17,7 +17,7 @@ class HomeController extends Controller
                 $users=User::all();
                 return view('admin.dashboard', compact('users'));
             }else{
-                return view('dashboard');
+                return view('dashboard', compact('post'));
             }
         }else{
             return view('home.index', compact('post'));
@@ -32,6 +32,7 @@ class HomeController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'client_case' => 'required',
+            'parent_id' => 'nullable',
             'description' => 'required',
             'document' => 'mimes:doc,docx,pdf,xls,xlsx,ppt,pptx',
         ]);
@@ -39,6 +40,7 @@ class HomeController extends Controller
         // assign description dari table post kat sini dalam variable
         $data->name=$request->name;
         $data->client_case=$request->client_case;
+        $data->parent_id=$request->parent_id;
         $data->description=$request->description;
         
         //inserting document part
@@ -126,15 +128,18 @@ class HomeController extends Controller
     }
 
     public function famtree(){
-        if(Auth::user()){
-            $role=Auth::user()->usertype ?? 'default';
-            if($role=='user'){
-                return view('familytree');
-            }
-        }else {
-            return redirect()->back();
+        $post=Post::all();
+        $role=Auth::user()->usertype ?? 'default';
+        $name=Auth::user()->name;
+        $post=Post::where('username','=', $name)->get();
+
+        $treeData = Post::with('children')->whereNull('parent_id')->get();
+
+        if($role=='user'){
+            return view('familytree', compact('post','treeData'));
         }
     }
+
 
     public function update_user($id){
         $data=User::find($id);
@@ -154,5 +159,15 @@ class HomeController extends Controller
         $data=User::find($id);
         $data->delete();
         return redirect()->back();
+    }
+
+    public function search(Request $request){
+        $search = $request->search;
+        $post=Post::query()
+        ->where('name', 'LIKE', "%{$search}%")
+        ->orwhere('client_case', 'LIKE', "%{$search}%")
+        ->orwhere('description', 'LIKE', "%{$search}%")
+        ->get();
+        return view('post_page',compact('post'));
     }
 }

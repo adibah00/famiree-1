@@ -4,12 +4,21 @@
             {{ __('User Dashboard') }} ({{Auth::user()->name}})
         </h2>
     </x-slot>
-
-   <h1>Family Tree Here !!!</h1>
+</x-app-layout>
    <style>
             /*Now the CSS*/
+
+            .container {
+                padding-top:200px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                margin: auto;
+            }
+
             .tree ul {
-            padding-left: 20px;
+            padding-left: 50px;
             position: relative;
             }
 
@@ -73,28 +82,35 @@
 
         </style>
 
-        <div>
-            <ul class="tree">
-                <li>
-                    Parent
-                    <ul>
-                    <li>
-                        Child 1
-                        <ul>
-                        <li>Grandchild 1</li>
-                        <li>Grandchild 2</li>
-                        </ul>
-                    </li>
-                    <li>
-                        Child 2
-                        <ul>
-                        <li>Grandchild 3</li>
-                        </ul>
-                    </li>
-                    </ul>
-                </li>
-            </ul>
-
+        <div class="container">
+            <div>
+            <!-- Render the tree visualization -->
+                <ul>
+                    @foreach($treeData as $node)
+                        <li>
+                            {{ $node->client_case }}
+                            @if($node->children->isNotEmpty())
+                                <ul>
+                                    @foreach($node->children as $child)
+                                        <li>
+                                            {{ $child->client_case }}
+                                            @if($child->children->isNotEmpty())
+                                                <ul>
+                                                    @foreach($child->children as $grandchild)
+                                                        <li>
+                                                            {{ $grandchild->client_case }}
+                                                            <!-- Add more nested loops for deeper levels if needed -->
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            @endif
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            @endif
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
         </div>
 
-</x-app-layout>
