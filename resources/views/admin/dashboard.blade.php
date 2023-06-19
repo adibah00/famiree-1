@@ -55,8 +55,26 @@
                         .delete-button:hover {
                         background-color: #c82333;
                         }
+
+                        .title {
+                            font-family: "Arial", sans-serif;
+                            font-size: 24px;
+                            font-weight: bold;
+                            color: #333;
+                            text-transform: uppercase;
+                            text-decoration: underline;
+                            letter-spacing: 2px;
+                        }
+
+                        .middle{
+                            text-align:center;
+                        }
                 </style>
             </head>
+
+                <div class="middle">
+                    <h1 class="title">ADMIN DASHBOARD</h1>
+                </div>
                 <div style="padding-left:15%; padding-top:30px;">
                     <table style="width:80%">
                         <tr>

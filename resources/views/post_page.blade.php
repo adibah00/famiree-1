@@ -51,11 +51,29 @@
                 .delete-button:hover {
                 background-color: #c82333;
             }
+
+            .title {
+                font-family: "Arial", sans-serif;
+                font-size: 24px;
+                font-weight: bold;
+                color: #333;
+                text-transform: uppercase;
+                text-decoration: underline;
+                letter-spacing: 2px;
+            }
+
+            .middle{
+                text-align:center;
+            }
         </style>
     </head>
     <body>
     <x-app-layout>
     </x-app-layout>
+
+        <div class="middle">
+            <h1 class="title">VIEW CLIENT DATA</h1>
+        </div>
         <div style="padding-left:15%; padding-top:30px;">
             <form action="{{url('/search')}}" method="get">
                 <input type="search" name="search">
@@ -76,7 +94,7 @@
                 <tr>
                     <td>{{$post->name}}</td>
                     <td>{{$post->client_case}}</td>
-                    <td><a class="doctex" href="post/{{$post->document}}">View Document Here</a></td>
+                    <td><a class="doctex" href="post/{{$post->document}}">{{$post->document}}</a></td>
                     <td>{{$post->description}}</td>
                     <td><img height="400px" width="400px" src="post/{{$post->image}}"></td>
                     <td><a href="{{url('update_post', $post->id)}}" class="update-button">Update</a></td>

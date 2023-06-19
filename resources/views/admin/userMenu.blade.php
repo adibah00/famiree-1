@@ -21,9 +21,26 @@
         label {
             margin-bottom: 10px;
         }
+
+        .title {
+            font-family: "Arial", sans-serif;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            text-transform: uppercase;
+            text-decoration: underline;
+            letter-spacing: 2px;
+        }
+
+        .middle{
+            text-align:center;
+        }
     </style>
 
     <div>
+        <div class="middle">
+            <h1 class="title">REGISTER USER</h1>
+        </div>
         <form action="{{url('/addUser')}}" method="POST">
             @csrf
             <div class="mb-6">

@@ -27,10 +27,27 @@
             color: red;
             font-weight: bold;
         }
+
+        .title {
+        font-family: "Arial", sans-serif;
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+        text-transform: uppercase;
+        text-decoration: underline;
+        letter-spacing: 2px;
+        }
+
+        .middle{
+            text-align:center;
+        }
     </style>
 
+    <div class="middle">
+        <h1 class="title">CLIENT INFORMATION FORM</h1>
+    </div>
+
     <div class="container">
-        <label style="padding-left:20%; font-size: 20px; font-weight: bold;">Add a Post</label>
         <br><br>
         <form action="{{ url('upload_post')}}" method="POST" enctype="multipart/form-data" class="userForm">
             @csrf

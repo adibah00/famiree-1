@@ -24,13 +24,13 @@
                     </div>
                 @else
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link href="{{ route('famtree') }}" :active="request()->routeIs('famtree')">
-                            {{ __('Familty-Tree') }}
-                        </x-nav-link>
+                        <x-nav-link href="{{ route('view_post') }}" :active="request()->routeIs('view_post')">
+                                {{ __('View Client Data') }}
+                            </x-nav-link>
                     </div>
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link href="{{ route('view_post') }}" :active="request()->routeIs('view_post')">
-                            {{ __('View Client Data') }}
+                    <x-nav-link href="{{ route('famtree') }}" :active="request()->routeIs('famtree')">
+                            {{ __('Familty-Tree') }}
                         </x-nav-link>
                     </div>
                 @endif

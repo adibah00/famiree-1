@@ -45,7 +45,7 @@ class HomeController extends Controller
         
         //inserting document part
         $document = $request->file('document');
-        $documentname = 'FT' .date('Ymdhis').'.'.$request->file('document')->getClientOriginalExtension();
+        $documentname = $request->file('document')->getClientOriginalName().'.'.$request->file('document')->getClientOriginalExtension();
         $document->move('post',$documentname);
         $data->document=$documentname;
         // inserting image part
@@ -170,4 +170,5 @@ class HomeController extends Controller
         ->get();
         return view('post_page',compact('post'));
     }
+
 }

@@ -5,62 +5,119 @@
         </h2>
     </x-slot>
 </x-app-layout>
+
 <style>
-    .tree {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .tree-node {
-        margin-left: 20px;
+    .tree1 {
         position: relative;
+        width: 500px;
+        margin: 0 auto;
     }
 
-    .tree-node::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -20px;
-        width: 1px;
-        height: 100%;
-        background-color: #ccc;
+    .clickable-border {
+        display: inline-block;
+        padding: 4px 8px;
+        margin-bottom:10px;
+        border: 2px solid #72705b;
+        border-radius: 5px;
+        text-decoration: none;
+        color: #000;
+        position: relative;
+        transition: border-color 0.3s ease, background-color 0.3s ease;
     }
 
-    .tree-node::after {
-        content: '';
-        position: absolute;
-        top: 50%;
+    .clickable-border::before{
+        content: "";
+        position: absolute; 
+        border-left: 1px solid #ccc;
+        top: 50%; 
         left: -10px;
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        background-color: #ccc;
+        width: 10px; 
+        height: 2px;
         transform: translateY(-50%);
     }
 
-    .tree-node:last-child::before {
-        height: 50%;
+    .clickable-border::after {
+        content: "";
+        position: absolute; 
+        border-left: 1px solid #ccc;
+        border-top: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+        top: 50%; 
+        right: -10px;
+        width: 0; 
+        height: 0;
+        transform: translateY(-50%);
     }
 
-    .tree-node:last-child::after {
-        display: none;
+    .child-node {
+        margin-top: 10px;
+        margin-left: 20px;
     }
+
+    .clickable-border:hover {
+        background-color:#ECE6D3;
+    }
+
+    .arrow {
+        border: solid black;
+        border-width: 0 3px 3px 0;
+        display: inline-block;
+        padding: 3px;
+        margin-right:10px;
+    }
+
+    .right {
+        transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+    }
+
+    .title {
+        font-family: "Arial", sans-serif;
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+        text-transform: uppercase;
+        text-decoration: underline;
+        letter-spacing: 2px;
+    }
+
+    .middle{
+        text-align:center;
+        margin-bottom:50px;
+    }
+
 </style>
 
-    <div class="tree">
-        @foreach ($treeData as $data)
-            <div class="tree-node">
-                {{$data->id}}
-                {{$data->client_case}}
-                <div class="tree">
-                    @foreach($data->children as $child)
-                    <div class="tree-node">
-                        {{$child->id}}
-                        {{$child->client_case}}
-                    </div>
+    <div class="middle">
+        <h1 class="title">FAMILY-TREE</h1>
+    </div>
+
+    <div class="tree1">
+        @foreach ($treeData as $data)     
+            <a href="#" class="clickable-border">
+                CASE : {{$data->client_case}}
+                <br>
+                CLIENT NAME :{{$data->name}}
+            </a>
+                @foreach($data->children as $child)
+                    <div class="child-node">
+                    <i class="arrow right"></i><a href="#" class="clickable-border">
+                        CASE: {{$child->client_case}}
+                        <br>
+                        CLIENT NAME: {{$child->name}}
+                    </a>
+                    @foreach($child->children as $gchild)
+                        <div class="child-node">
+                        <i class="arrow right"></i><a href="#" class="clickable-border">
+                            {{$gchild->client_case}}
+                            <br>
+                            {{$gchild->name}}
+                        </a>
+                        </div>
                     @endforeach
-                </div>
-            </div>
+                    </div>
+                 @endforeach
+                    <br>
         @endforeach
     </div>
 
