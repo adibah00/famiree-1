@@ -5,6 +5,11 @@
         </h2>
     </x-slot>
 
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+
     <style>
         .container{
             margin:auto;
@@ -41,7 +46,41 @@
         .middle{
             text-align:center;
         }
+
+        .alert-danger {
+        color: #721c24;
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+        padding: 0.75rem 1.25rem;
+        border-radius: 0.25rem;
+        }
+
+        .alert-danger strong {
+        font-weight: bold;
+        }
+
+        .alert-danger p {
+        margin-bottom: 0;
+        }
+
+        span.required {
+        color: red;
+        }
+
+        .full-width-input {
+        width: 100%;
+        }
     </style>
+
+    <div class="container">
+        @if($errors->any())
+            @foreach($errors->all() as $error)
+                <div class="alert alert-danger">
+                    {{$error}}
+                </div>
+            @endforeach
+        @endif
+    </div>
 
     <div class="middle">
         <h1 class="title">CLIENT INFORMATION FORM</h1>
@@ -52,8 +91,8 @@
         <form action="{{ url('upload_post')}}" method="POST" enctype="multipart/form-data" class="userForm">
             @csrf
             <div>
-                <label>Name</label>
-                <input type="text" name="name">
+                <label>Name<span class="required">*</span></label><br>
+                <input type="text" name="name" class="full-width-input">
             </div>
             <br><br>
             <div>
@@ -78,10 +117,7 @@
                 <br>
                 <p class="danger-text">NOTE : If the client case is already in the table above, just enter the id number of the first case availabe for parent id.</p>
                 <br>
-                <label>Case</label>
-                <input type="text" name="client_case">
             </div>
-            <br><br>
             <div>
                 <label>Parent_ID</label>
                 <select name="parent_id">
@@ -91,15 +127,20 @@
                     @endforeach
                  </select>
             </div>
+            <br>
+            <div>
+            <label>Case<span class="required">*</span></label><br>
+                <input type="text" name="client_case" class="full-width-input">
+            </div>
+            <br><br>
+            <div>
+                <label>Description<span class="required">*</span></label><br>
+                <input type="text" name="description" class="full-width-input">
+            </div>
             <br><br>
             <div>
                 <label>Document</label>
                 <input type="file" name="document">
-            </div>
-            <br><br>
-            <div>
-                <label>Description</label>
-                <input type="text" name="description">
             </div>
             <br><br>
             <div>

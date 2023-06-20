@@ -17,7 +17,7 @@
 
     <style>
         .container {
-            max-width: 800px;
+            width:100%;
             margin: 0 auto;
             padding: 20px;
         }
@@ -51,8 +51,32 @@
         }
         
         .image-container img {
-            max-width: 100%;
-            height: auto;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        .welcome-sign {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        }
+
+        .welcome-sign img{
+            width: 50px;
+            height: 50px;
+            margin-left:20px;
+        }
+
+        .welcome-sign h1 {
+            font-size: 36px;
+            color: #333;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .center-container {
+            display: flex;
+            align-items: center;
         }
     </style>
 
@@ -70,13 +94,17 @@
                 @endif
             </ul>
         </nav>
-       
-        <div class="image-container">
-            <img src="{{ asset('logo NONC.jpg') }}" alt="Image">
+
+        <div class="welcome-sign">
+            <div class="center-container">
+                <h1>Welcome to FAMIREE</h1>
+                <img src="{{ asset('LOGO/FAMIREE.png') }}" alt="Image">
+            </div>
         </div>
+       
         <div class="container">
             <p>
-                <h1>About Us</h1> <br>   
+                <h1>Tentang Kami</h1> <br>   
                 Najib Omar & Co. adalah sebuah firma guaman yang berdaftar dengan Majlis Peguam Malaysia, iaitu sebuah badan profesional yang mengawal selia profesion peguam di Semenanjung Malaysia.
                 Bagi memenuhi syarat kemasukan Majlis Peguam Malaysia, firma guaman Najib Omar & Co. dan para peguamnya telah memenuhi kelayakan akademik, praktikal, dan formal yang telah ditetapkan oleh Akta Profesion Undang-Undang 1976, iaitu sebuah akta yang berkaitan dengan profesion peguam Malaysia.
             </p>
