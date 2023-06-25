@@ -9,8 +9,8 @@
 <style>
     .tree1 {
         position: relative;
-        width: 500px;
-        margin: 0 auto;
+        width: 1300px;
+        margin-left:50px;
     }
 
     .clickable-border {
@@ -51,7 +51,7 @@
 
     .child-node {
         margin-top: 10px;
-        margin-left: 20px;
+        margin-left: 60px;
     }
 
     .clickable-border:hover {
@@ -59,11 +59,13 @@
     }
 
     .arrow {
+        display:inline-block;
+        width: 10px;
+        height: 10px;
         border: solid black;
         border-width: 0 3px 3px 0;
-        display: inline-block;
         padding: 3px;
-        margin-right:10px;
+        margin-right:30px;
     }
 
     .right {
@@ -86,6 +88,22 @@
         margin-bottom:50px;
     }
 
+    .treeContainer{
+        display: flex;
+        align-items: center;
+    }
+
+    .text {
+        margin-left: 30px; /* Adjust the margin as needed */
+        border: 2px solid #000;
+        padding: 10px;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .bordered-image {
+        border: 2px solid #000; /* Adjust the border width and color as needed */
+    }
+
 </style>
 
     <div class="middle">
@@ -93,25 +111,44 @@
     </div>
 
     <div class="tree1">
-        @foreach ($treeData as $data)     
+        @foreach($treeData as $data)     
             <a href="#" class="clickable-border">
                 CASE : {{$data->client_case}}
                 <br>
-                CLIENT NAME :{{$data->name}}
+                <div class="treeContainer">
+                    <img class="bordered-image" height="100px" width="100px" src="post/{{$data->image}}">
+                    <p class="text">NAME :<br>{{$data->name}}</p>
+                    <p class="text">Tel. Number :<br>{{$data->notel}}</p>     
+                    <p class="text">IC NUmber :<br>{{$data->icno}} </p>    
+                    <p class="text"> Address :<br>{{$data->address}}</p>    
+                    
+                </div>
             </a>
                 @foreach($data->children as $child)
                     <div class="child-node">
                     <i class="arrow right"></i><a href="#" class="clickable-border">
                         CASE: {{$child->client_case}}
                         <br>
-                        CLIENT NAME: {{$child->name}}
+                        <div class="treeContainer">
+                            <img class="bordered-image" height="100px" width="100px" src="post/{{$child->image}}">
+                            <p class="text">NAME :<br>{{$child->name}}</p>
+                            <p class="text">Tel. Number :<br>{{$child->notel}}</p>     
+                            <p class="text">IC NUmber :<br>{{$child->icno}}</p>     
+                            <p class="text">Address :<br>{{$child->address}}</p>  
+                        </div>
                     </a>
                     @foreach($child->children as $gchild)
                         <div class="child-node">
                         <i class="arrow right"></i><a href="#" class="clickable-border">
                             {{$gchild->client_case}}
                             <br>
-                            {{$gchild->name}}
+                            <div class="treeContainer">
+                            <img class="bordered-image" height="100px" width="100px" src="post/{{$gchild->image}}">
+                            <p class="text">NAME :{{$gchild->name}}</p>
+                            <p class="text">Tel. Number :{{$gchild->notel}}</p>
+                            <p class="text">IC NUmber :{{$gchild->icno}}</p>
+                            <p class="text">Address :{{$gchild->address}}</p>
+                        </div>
                         </a>
                         </div>
                     @endforeach

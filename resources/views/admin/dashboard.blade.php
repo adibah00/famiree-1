@@ -23,14 +23,16 @@
                     tr, td{
                         background: #f9f9f9;
                         text-align: center;
+                        white-space: normal;
                     }
+
                     /* Update button */
                         .update-button {
                         display: inline-block;
                         width: 100%;
+                        padding:5px;
                         background-color: #007bff;
                         color: #fff;
-                        padding: 10px 20px;
                         border: none;
                         border-radius: 4px;
                         cursor: pointer;
@@ -44,9 +46,9 @@
                         .delete-button {
                         display: inline-block;
                         width: 100%;
+                        padding:5px;
                         background-color: #dc3545;
                         color: #fff;
-                        padding: 10px 20px;
                         border: none;
                         border-radius: 4px;
                         cursor: pointer;
@@ -69,13 +71,15 @@
                         .middle{
                             text-align:center;
                         }
+
+  
                 </style>
             </head>
 
                 <div class="middle">
                     <h1 class="title">ADMIN DASHBOARD</h1>
                 </div>
-                <div style="padding-left:15%; padding-top:30px;">
+                <div style="padding-left:15%; padding-top:10px;">
                     <table style="width:80%">
                         <tr>
                             <th>Name</th>

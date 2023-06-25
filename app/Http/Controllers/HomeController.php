@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rules;
 
 class HomeController extends Controller
 {
@@ -31,6 +32,9 @@ class HomeController extends Controller
 
         $this->validate($request, [
             'name' => 'required',
+            'notel' => 'required',
+            'icno' => 'required',
+            'address' => 'required',
             'client_case' => 'required',
             'parent_id' => 'nullable',
             'description' => 'required',
@@ -39,6 +43,9 @@ class HomeController extends Controller
 
         // assign description dari table post kat sini dalam variable
         $data->name=$request->name;
+        $data->notel=$request->notel;
+        $data->icno=$request->icno;
+        $data->address=$request->address;
         $data->client_case=$request->client_case;
         $data->parent_id=$request->parent_id;
         $data->description=$request->description;
@@ -91,7 +98,7 @@ class HomeController extends Controller
         $image=$request->image;
 
         $document = $request->file('document');
-        $documentname = 'FT' .date('Ymdhis').'.'.$request->file('document')->getClientOriginalExtension();
+        $documentname = $request->file('document')->getClientOriginalName().'.'.$request->file('document')->getClientOriginalExtension();
         $document->move('post',$documentname);
         $post->document=$documentname;
 
@@ -103,11 +110,16 @@ class HomeController extends Controller
             // until here for image
         }
         $post->save();
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Post Updated Successfully');
     }
 
     public function addUser(Request $request){
-        $data=new user;
+        $data=new User;
+        $this->validate($request, [
+            'name' => 'required', 'string', 'max:255',
+            'email' => 'required', 'string', 'email', 'max:255', 
+            'password' => 'required', 'confirmed',
+        ]);
         $data->name=$request->name;
         $data->email=$request->email;
         $data->password=bcrypt($request->password);
@@ -141,8 +153,9 @@ class HomeController extends Controller
     }
 
 
-    public function update_user($id){
+    public function update_user(Request $request, $id){
         $data=User::find($id);
+        $request->session()->flash('success', 'Action was successful.');
         return view('admin.updateuser', compact('data'));
     }
 

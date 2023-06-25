@@ -12,7 +12,7 @@
 
     <style>
         .container{
-            margin:auto;
+            margin: 0 auto;
         }
         .userForm{
             padding-left: 200px;
@@ -96,6 +96,21 @@
             </div>
             <br><br>
             <div>
+                <label>Tel. No<span class="required">*</span></label><br>
+                <input type="tel" name="notel" class="full-width-input">
+            </div>
+            <br><br>
+            <div>
+                <label>IC Number<span class="required">*</span></label><br>
+                <input type="text" name="icno" class="full-width-input">
+            </div>
+            <br><br>
+            <div>
+                <label>Address<span class="required">*</span></label><br>
+                <input type="text" name="address" class="full-width-input">
+            </div>
+            <br><br>
+            <div>
                 <div>
                     <h2>This is Current Cases that are available in database</h2>
                     <br>
@@ -139,7 +154,7 @@
             </div>
             <br><br>
             <div>
-                <label>Document</label>
+                <label>Document</label> <br>
                 <input type="file" name="document">
             </div>
             <br><br>

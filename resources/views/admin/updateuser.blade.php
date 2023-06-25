@@ -4,10 +4,30 @@
     <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title></title>
+        <style>
+            .title {
+            font-family: "Arial", sans-serif;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            text-transform: uppercase;
+            text-decoration: underline;
+            letter-spacing: 2px;
+        }
+
+        .middle{
+            text-align:center;
+        }
+        </style>
     </head>
     <body>
     <x-app-layout>
     </x-app-layout>
+
+        <div class="middle">
+            <h1 class="title">UPDATE USER FORM</h1>
+        </div>
+
         <div style="padding-left: 40%; padding-top: 10%;">
             <form action="{{url('confirm_updateUser', $data->id)}}" method="POST" enctype="multipart/form-data">
                 @csrf
