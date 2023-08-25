@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\LoginEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
@@ -30,6 +31,11 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         return redirect()->intended(RouteServiceProvider::HOME);
+    }
+
+    protected function authenticated(Request $request, $user)
+    {
+        event(new LoginEvent($user->name, $user->email));
     }
 
     /**

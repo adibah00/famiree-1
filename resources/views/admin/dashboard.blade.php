@@ -84,6 +84,7 @@
                         <tr>
                             <th>Name</th>
                             <th>Email</th>
+                            <th>Role</th>
                             <th>Password</th>
                             <th>Update</th>
                             <th>Delete</th>
@@ -92,6 +93,7 @@
                         <tr>
                             <td>{{$user->name}}</td>
                             <td>{{$user->email}}</td>
+                            <td>{{$user->usertype}}</td>
                             <td>{{$user->password}}</td>
                             <td><a href="{{url('update_user', $user->id)}}" class="update-button">Update</a></td>
                             <td><a onclick="return confirm('are sure to delete this ?');" href="{{url('delete_user', $user->id)}}" class="delete-button">Delete</a></td>

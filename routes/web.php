@@ -34,6 +34,8 @@ Route::get('/update_user/{id}', [HomeController::class, 'update_user'])->name('u
 Route::post('/confirm_updateUser/{id}', [HomeController::class, 'confirm_updateUser']);
 Route::get('/delete_user/{id}', [HomeController::class, 'delete_user']);
 Route::get('/search', [HomeController::class, 'search']);
+Route::get('/resetPass', [HomeController::class, 'resetPass']);
+Route::post('/resetPwd', [HomeController::class, 'resetPwd'])->name('resetPwd');
 Route::get('/root', function(){
     $post = Post::root()->get();
     return view('famtree', [

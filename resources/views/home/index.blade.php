@@ -12,126 +12,131 @@
 
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-        <title></title>
+
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <title>HOMEPAGE</title>
     </head>
 
     <style>
-        .container {
-            width:100%;
-            margin: 0 auto;
+
+        *{
+            padding: 0;
+            margin: 0;
+        }
+
+        .wrapper{
+            background: url(bg.jpg) no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+            height: 100vh;
+        }
+
+        .wrapper .welcome-sign {
+            background-color: rgba(81, 4, 0, 0.7);
+            -webkit-backdrop-filter: sepia(100%);
+            backdrop-filter: sepia(100%);
             padding: 20px;
-        }
-        
-        h1, h2 {
-            color: #333;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-        
-        p {
-            color: #666;
-            line-height: 1.5;
-            text-align: justify;
-        }
-        
-        ul {
-            margin-top: 10px;
-            margin-bottom: 20px;
-        }
-        
-        li {
-            color: #666;
-        }
-
-        .image-container {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-            margin-top:20px;
-        }
-        
-        .image-container img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-        }
-
-        .welcome-sign {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        }
-
-        .welcome-sign img{
-            width: 50px;
-            height: 50px;
-            margin-left:20px;
+            margin: 30px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: sans-serif;
+            user-select: none;
         }
 
         .welcome-sign h1 {
-            font-size: 36px;
-            color: #333;
+            font-size: 180px;
+            color: #FFF3C6;
+            font-weight: bold;
+            width: 1000px;
+            text-align: center;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
-        .center-container {
-            display: flex;
-            align-items: center;
+        .navbar ul li{
+            margin: 0 8px;
         }
+
+        .navbar ul li a{
+            text-decoration: none;
+            color: #FFFDD0;
+            padding: 6px 13px;
+            transition: .4s;
+        }
+
+        .navbar ul li a.active,
+        .navbar ul li a:hover{
+            background: maroon;
+            border-radius: 2px;
+        }
+      
     </style>
 
     <body>
-        <nav>
-            <label class="logo">FAMIREE</label>
-            <ul>
-                @if (Route::has('login'))
-                @auth
-                <li><a href="{{ url('/dashboard') }}" class="btn btn-success">{{ Auth::user()->name }}</a></li>
-                @else
-                <!-- <li><a href="{{ route('register') }}" class="btn btn-success">Register</a></li> -->
-                <li><a href="{{ route('login') }}" class="btn btn-primary">Login</a></li>
-                @endauth
-                @endif
-            </ul>
-        </nav>
+          
+        <div class="wrapper">
+            <nav class="navbar">
+                <label class="logo">FAMIREE</label>
+                <ul>
+                    @if (Route::has('login'))
+                    @auth
+                    <li><a href="{{ url('/dashboard') }}" class="btn btn-success">{{ Auth::user()->name }}</a></li>
+                    @else
+                    <li><a class="active" href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li>
+                        <a href="{{ route('login') }}">Login</a>
+                    </li>
+                    @endauth
+                    @endif
+                </ul>
+            </nav>
 
-        <div class="welcome-sign">
-            <div class="center-container">
+            <div class="welcome-sign">
+                <!-- <img src="{{ asset('LOGO/FAMIREE.png') }}" alt="Image"> -->
                 <h1>Welcome to FAMIREE</h1>
-                <img src="{{ asset('LOGO/FAMIREE.png') }}" alt="Image">
             </div>
+
+            <!-- <div class="container">
+                <p>
+                    <h1>Tentang Kami</h1> <br>   
+                    Najib Omar & Co. adalah sebuah firma guaman yang berdaftar dengan Majlis Peguam Malaysia, iaitu sebuah badan profesional yang mengawal selia profesion peguam di Semenanjung Malaysia.
+                    Bagi memenuhi syarat kemasukan Majlis Peguam Malaysia, firma guaman Najib Omar & Co. dan para peguamnya telah memenuhi kelayakan akademik, praktikal, dan formal yang telah ditetapkan oleh Akta Profesion Undang-Undang 1976, iaitu sebuah akta yang berkaitan dengan profesion peguam Malaysia.
+                </p>
+                
+                <p> 
+                    <h2>Maklumat Firma Guaman</h2><br>
+                    <img src="{{ asset('location.png') }}" alt="Image"> <br>
+                    Alamat: No. 67-02, 2nd Floor, Susur Larkin Perdana 1, Larkin Perdana, 80350 Johor Bahru, Johor
+                    <br>
+                    E-mel: najibomar1310@yahoo.com
+                    <br>
+                    Phone: 07-2374886
+                    <br>
+                    Faks: 07-2374090
+                </p>
+                
+                <p>
+                    <h2>Maklumat Peguam</h2><br>
+                    <h3>Haffisza Binti Ahmad</h3>
+                    <br>
+                    Tarikh Kemasukan: 29-03-2003 <br>
+                    Kelayakan: Universiti Malaya (UM) <br>
+                    <h3>Mohd Najib B Omar</h3>
+                    Tarikh Kemasukan: 18-03-1993 <br>
+                    Kelayakan: International Islamic University (IIU)
+                </p>
+                
+            </div> -->
+
         </div>
-       
-        <div class="container">
-            <p>
-                <h1>Tentang Kami</h1> <br>   
-                Najib Omar & Co. adalah sebuah firma guaman yang berdaftar dengan Majlis Peguam Malaysia, iaitu sebuah badan profesional yang mengawal selia profesion peguam di Semenanjung Malaysia.
-                Bagi memenuhi syarat kemasukan Majlis Peguam Malaysia, firma guaman Najib Omar & Co. dan para peguamnya telah memenuhi kelayakan akademik, praktikal, dan formal yang telah ditetapkan oleh Akta Profesion Undang-Undang 1976, iaitu sebuah akta yang berkaitan dengan profesion peguam Malaysia.
-            </p>
-            
-            <p> 
-                <h2>Maklumat Firma Guaman</h2><br>
-                <img src="{{ asset('location.png') }}" alt="Image"> <br>
-                Alamat: No. 67-02, 2nd Floor, Susur Larkin Perdana 1, Larkin Perdana, 80350 Johor Bahru, Johor
-                <br>
-                E-mel: najibomar1310@yahoo.com
-                <br>
-                Phone: 07-2374886
-                <br>
-                Faks: 07-2374090
-            </p>
-            
-            <p>
-                <h2>Maklumat Peguam</h2><br>
-                <h3>Haffisza Binti Ahmad</h3>
-                <br>
-                Tarikh Kemasukan: 29-03-2003 <br>
-                Kelayakan: Universiti Malaya (UM) <br>
-                <h3>Mohd Najib B Omar</h3>
-                Tarikh Kemasukan: 18-03-1993 <br>
-                Kelayakan: International Islamic University (IIU)
-            </p>
-            
-        </div>
+
     </body>
 </html>

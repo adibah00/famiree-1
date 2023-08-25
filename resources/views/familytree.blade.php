@@ -4,7 +4,7 @@
             {{ __('User Dashboard') }} ({{Auth::user()->name}})
         </h2>
     </x-slot>
-</x-app-layout>
+
 
 <style>
     .tree1 {
@@ -157,4 +157,4 @@
                     <br>
         @endforeach
     </div>
-
+</x-app-layout>

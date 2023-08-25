@@ -15,7 +15,7 @@
             margin: 0 auto;
         }
         .userForm{
-            padding-left: 200px;
+            padding-left: 50px;
         }
 
         table, tr, td{
@@ -118,14 +118,14 @@
                         <tr style="font-weight:bold">
                             <th>ID Case</th>
                             <th>Case</th>
-                            <th>Case Parent_ID</th>
                         </tr>
                         @foreach($post as $posts)
-                            <tr>
-                                <td>{{$posts->id}}</td>
-                                <td>{{$posts->client_case}}</td>
-                                <td>{{$posts->parent_id}}</td>
-                            </tr>
+                            @if($posts->parent_id == NULL)
+                                <tr>
+                                    <td>{{$posts->id}}</td>
+                                    <td>{{$posts->client_case}}</td>
+                                </tr>
+                            @endif
                         @endforeach
                     </table>
                 </div>
@@ -138,7 +138,9 @@
                 <select name="parent_id">
                     <option value="">Select parent_id for the case</option>
                     @foreach($post as $post)
-                        <option value="{{$post->id}}">{{$post->id}}</option>
+                        @if($post->parent_id == NULL)
+                            <option value="{{$post->id}}">{{$post->id}}</option>
+                        @endif
                     @endforeach
                  </select>
             </div>
@@ -154,7 +156,7 @@
             </div>
             <br><br>
             <div>
-                <label>Document</label> <br>
+                <label>Document</label><br>
                 <input type="file" name="document">
             </div>
             <br><br>

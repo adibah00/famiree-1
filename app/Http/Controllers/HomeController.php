@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Validation\Rules\Password;
 
 class HomeController extends Controller
 {
@@ -123,9 +126,10 @@ class HomeController extends Controller
         $data->name=$request->name;
         $data->email=$request->email;
         $data->password=bcrypt($request->password);
-        $data->usertype='user';
+        $selectedOption = $request->input('dropdown');
+        $data->usertype = $selectedOption;
         $data->save();
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Data Updated successfully.');
     }
 
     public function User_menu(){
@@ -180,8 +184,27 @@ class HomeController extends Controller
         ->where('name', 'LIKE', "%{$search}%")
         ->orwhere('client_case', 'LIKE', "%{$search}%")
         ->orwhere('description', 'LIKE', "%{$search}%")
+        ->orwhere('document', 'LIKE', "%{$search}%")
         ->get();
         return view('post_page',compact('post'));
     }
 
+    public function resetPass(){
+        return view('resetPwd');
+    }
+
+    public function resetPwd(Request $request){
+        $request->validate([
+            'email' => 'required|email|exists:users',
+            'password' => 'required|confirmed|min:8',
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+
+        $user->password = bcrypt($request->password);
+
+        $user->save();
+
+        return redirect()->route('login')->with('success', 'Your password has been reset.');
+    }
 }

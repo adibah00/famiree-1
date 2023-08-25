@@ -1,3 +1,10 @@
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Dashboard') }} ({{Auth::user()->name}})
+        </h2>
+    </x-slot>
+    
 <!DOCTYPE html>
 <html>
     <head>
@@ -6,6 +13,10 @@
         <title></title>
         <!-- Latest compiled and minified CSS -->
         <style type="text/css">
+            body{
+                margin: 0 auto;
+            }
+
             table, tr, td{
                 border: 1px solid #232023;
                 border-collapse: collapse;
@@ -68,8 +79,6 @@
         </style>
     </head>
     <body>
-    <x-app-layout>
-    </x-app-layout>
 
         <div class="middle">
             <h1 class="title">VIEW CLIENT DATA</h1>
@@ -107,3 +116,5 @@
 
     </body>
 </html>
+
+</x-app-layout>
